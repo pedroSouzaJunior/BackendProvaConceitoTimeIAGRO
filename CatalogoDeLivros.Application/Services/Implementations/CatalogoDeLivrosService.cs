@@ -2,7 +2,6 @@
 using CatalogoDeLivros.Application.Services.Interfaces;
 using CatalogoDeLivros.Application.ViewModels;
 
-
 namespace CatalogoDeLivros.Application.Services.Implementations
 {
     public class CatalogoDeLivrosService : ICatalogoDeLivros
@@ -15,63 +14,84 @@ namespace CatalogoDeLivros.Application.Services.Implementations
             _livroRepository = livroRepository;
         }
 
-        public List<LivroViewModel> BuscarPorIlustrador(string ilustrador)
+        public List<LivroViewModel> BuscarPorIlustrador(string ilustrador, string ordem)
         {
             var livros = _livroRepository.Listar();
 
             var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(ilustrador) || l.Specifications.Illustrator.Contains(ilustrador)));
 
-            return livrosFiltrados.ToList();
+            return Ordenar(livrosFiltrados.ToList(), ordem);
         }
 
-        public List<LivroViewModel> BuscarPorAutor(string autor)
+        public List<LivroViewModel> BuscarPorAutor(string autor, string ordem)
         {
             var livros = _livroRepository.Listar();
 
             var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(autor) || l.Specifications.Author.Contains(autor)));
 
-            return livrosFiltrados.ToList();
+            return Ordenar(livrosFiltrados.ToList(), ordem);
         }
 
-        public List<LivroViewModel> BuscarPorDataDePublicacao(string dataDePublicacao)
+        public List<LivroViewModel> BuscarPorDataDePublicacao(string dataDePublicacao, string ordem)
         {
             var livros = _livroRepository.Listar();
 
             var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(dataDePublicacao) || l.Specifications.OriginallyPublished.Contains(dataDePublicacao)));
 
-            return livrosFiltrados.ToList();
+            return Ordenar(livrosFiltrados.ToList(), ordem);
         }
 
-        public List<LivroViewModel> BuscarPorGenero(string genero)
+        public List<LivroViewModel> BuscarPorGenero(string genero, string ordem)
         {
             var livros = _livroRepository.Listar();
 
             var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(genero) || l.Specifications.Genres.Contains(genero)));
 
-            return livrosFiltrados.ToList();
+            return Ordenar(livrosFiltrados.ToList(), ordem);
         }
 
-        public List<LivroViewModel> BuscarPorNome(string nome)
+        public List<LivroViewModel> BuscarPorNome(string nome, string ordem)
         {
             var livros = _livroRepository.Listar();
 
             var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(nome) || l.Name.Contains(nome)));
 
-            return livrosFiltrados.ToList();
+            return Ordenar(livrosFiltrados.ToList(), ordem);
         }
 
-        public List<LivroViewModel> BuscarPorPreco(decimal preco)
+        public List<LivroViewModel> BuscarPorPreco(decimal preco, string ordem)
         {
             var livros = _livroRepository.Listar();
 
             var livrosFiltrados = livros.Where(l => (preco == 0 || l.Price == preco));
 
-            return livrosFiltrados.ToList();
+            return Ordenar(livrosFiltrados.ToList(), ordem);
         }
 
-        public List<LivroViewModel> Listar()
+        public decimal CalcularValorFrete(decimal preco)
         {
-            return _livroRepository.Listar();
+            decimal valorFrete = preco * 0.2m;
+            return valorFrete;
+        }
+
+        public List<LivroViewModel> Listar(string ordem)
+        {
+            var livros = _livroRepository.Listar();
+            return Ordenar(livros, ordem);
+        }
+
+        private List<LivroViewModel> Ordenar(List<LivroViewModel> livros, string ordem)
+        {
+            if (ordem.ToLower().Equals("asc"))
+            {
+                livros = livros.OrderBy(l => l.Price).ToList();
+            }
+            else
+            {
+                livros = livros.OrderByDescending(l => l.Price).ToList();
+            }
+
+            return livros;
         }
     }
 }
