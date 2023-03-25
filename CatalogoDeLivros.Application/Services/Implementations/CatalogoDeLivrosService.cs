@@ -18,9 +18,9 @@ namespace CatalogoDeLivros.Application.Services.Implementations
         {
             var livros = _livroRepository.Listar();
 
-            var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(ilustrador) || l.Specifications.Illustrator.Contains(ilustrador)));
+            var livrosFiltrados = livros.Where(l => (string.IsNullOrEmpty(ilustrador) || l.Specifications.Illustrator.Contains(ilustrador))).ToList();
 
-            return Ordenar(livrosFiltrados.ToList(), ordem);
+            return Ordenar(livrosFiltrados, ordem);
         }
 
         public List<LivroViewModel> BuscarPorAutor(string autor, string ordem)
