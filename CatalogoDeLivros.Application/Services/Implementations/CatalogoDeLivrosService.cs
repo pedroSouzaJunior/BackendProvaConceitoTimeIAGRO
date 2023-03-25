@@ -1,19 +1,22 @@
-﻿using CatalogoDeLivros.Application.Services.Interfaces;
+﻿using CatalogoDeLivros.Application.Repositories;
+using CatalogoDeLivros.Application.Services.Interfaces;
 using CatalogoDeLivros.Application.ViewModels;
+
 
 namespace CatalogoDeLivros.Application.Services.Implementations
 {
     public class CatalogoDeLivrosService : ICatalogoDeLivros
     {
-        public CatalogoDeLivrosService()
+        private readonly ILivroRepository _livroRepository;
+
+        public CatalogoDeLivrosService(ILivroRepository livroRepository)
         {
+            _livroRepository = livroRepository;
         }
 
         public List<LivroViewModel> Listar()
         {
-            //obter os livros do json
-            //retornar para o usuário
-            return new List<LivroViewModel>();
+            return _livroRepository.Listar();
         }
     }
 }

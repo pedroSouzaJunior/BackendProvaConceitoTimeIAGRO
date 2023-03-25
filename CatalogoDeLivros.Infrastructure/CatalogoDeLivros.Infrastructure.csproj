@@ -11,9 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="wwwroot\books.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <ProjectReference Include="..\CatalogoDeLivros.Application\CatalogoDeLivros.Application.csproj" />
   </ItemGroup>
 
 </Project>
