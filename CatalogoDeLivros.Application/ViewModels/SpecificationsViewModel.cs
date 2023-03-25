@@ -12,7 +12,7 @@ namespace CatalogoDeLivros.Application.ViewModels
         public string Author { get; set; }
 
         [JsonProperty("Page count")]
-        public int PageCount { get; set; }
+        public int? PageCount { get; set; }
 
         [JsonProperty("Illustrator")]
         [JsonConverter(typeof(IllustratorConverter))]

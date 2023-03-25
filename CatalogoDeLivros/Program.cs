@@ -1,6 +1,7 @@
 using CatalogoDeLivros.Application.Repositories;
 using CatalogoDeLivros.Application.Services.Implementations;
 using CatalogoDeLivros.Application.Services.Interfaces;
+using CatalogoDeLivros.Application.Specifications;
 
 var builder = WebApplication.CreateBuilder(args);
 

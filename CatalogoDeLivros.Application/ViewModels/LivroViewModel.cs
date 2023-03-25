@@ -12,7 +12,7 @@ namespace CatalogoDeLivros.Application.ViewModels
         public string Name { get; set; }
 
         [JsonProperty("price")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [JsonProperty("specifications")]
         public SpecificationsViewModel Specifications { get; set; }
