@@ -15,11 +15,11 @@ namespace CatalogoDeLivros.Application.ViewModels
         public int? PageCount { get; set; }
 
         [JsonProperty("Illustrator")]
-        [JsonConverter(typeof(IllustratorConverter))]
+        [JsonConverter(typeof(ConversorIllustrator))]
         public List<string> Illustrator { get; set; }
 
         [JsonProperty("Genres")]
-        [JsonConverter(typeof(IllustratorConverter))]
+        [JsonConverter(typeof(ConversorIllustrator))]
         public List<string> Genres { get; set; }
     }
 }

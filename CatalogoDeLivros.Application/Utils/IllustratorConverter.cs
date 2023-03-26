@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace CatalogoDeLivros.Application.Utils
 {
-    public class IllustratorConverter : JsonConverter
+    public class ConversorIllustrator : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
@@ -25,7 +23,7 @@ namespace CatalogoDeLivros.Application.Utils
             }
             else
             {
-                throw new JsonReaderException("Invalid Illustrator value.");
+                throw new JsonReaderException("Valor invalido para Illustrator");
             }
         }
 
